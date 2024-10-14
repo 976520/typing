@@ -85,7 +85,7 @@
 
 
 <style>
-  @import '../../lib/css/style.css';
+  @import '../../lib/style/style.css';
 </style>
 
 <main>
