@@ -1,7 +1,7 @@
 <script>
   let textList = [];
   
-  let text = textList[0];
+  let text = "";
   let input = "";
   let currentIndex = 0;
   let score = 0;
@@ -56,7 +56,6 @@
     }
   }
 
-
   function selectRandomText() {
     text = textList[Math.floor(Math.random() * textList.length)];
   }
@@ -68,18 +67,22 @@
         "Java",
         "Python",
         "Int",
-        "String"
+        "String",
+        "Boolean",
+        "Double",
+        "Float",
       ];
     } else if (difficulty === "short_sentence") {
       textList = [
         "I take a look at my life and realize there's nothin' left",
         "Listening to my heart instead of my head",
-        "I have these lucid dreams where I can't move a thing"
+        "I have these lucid dreams where I can't move a thing",
+        "I'm representing for them gangstas all across the world"
       ];
     } else if (difficulty === "long_sentence") {
       textList = [
-        "Svelte is a powerful tool",
-        "Svelte is a super tool"
+        "Since the last time you heard from me, I lost some friends. Well, hell, me and Snoop, we dippin' again. Kept my ear to the streets, signed Eminem. He's triple platinum, doing 50 a week.",
+        "Svelte is a super tool for building web applications."
       ];
     }
     selectRandomText();
