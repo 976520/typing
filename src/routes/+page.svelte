@@ -13,7 +13,7 @@
   
   const DIFFICULTY_TEXTS = {
     word: [
-      "Javascript", "Java", "Python", "Int", "String", "Boolean", "Double", "Float", "Computer science", "Binary tree", "Class", "Object", "Module", "Stack", "Depth first search", "Breadth first search", "Backtracking"
+      "Javascript", "Java", "Python", "Int", "String", "Boolean", "Double", "Float", "Computer science", "Binary tree", "Class", "Object", "Module", "Stack", "Depth first search", "Breadth first search", "Back"
     ],
     short_sentence: [
       "Pop another drugs different color", "Never was much of a romantic",
@@ -112,25 +112,99 @@
     align-items: center;
     padding: 2rem;
     justify-content: center;
+    background-color: #f0f0f5;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 2rem auto;
   }
-  .text, .input-area {
-    font-family: Consolas;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    width: 50rem;
-    justify-self: center;
+
+  .text {
+    font-family: 'Consolas', monospace;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    color: #333;
   }
+
   .input-area {
-    font-size: 1.2rem;
+    font-family: 'Consolas', monospace;
+    font-size: 1.4rem;
+    padding: 0.8rem;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease-in-out;
   }
+
+  .input-area:focus {
+    border-color: #2980b9;
+    outline: none;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    background-color: #1d6fa5;
+    transform: translateY(0);
+  }
+
   .score, .timer, .stats {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #85d8ce, #0974b5);
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
   }
+
+  .score:hover, .timer:hover, .stats:hover {
+    transform: translateY(-2px);
+  }
+
   .difficulty-selector {
     margin-bottom: 1rem;
   }
+
+  select {
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  select:focus {
+    border-color: #2980b9;
+    outline: none;
+  }
 </style>
+
 
 <div class="container">
   <div class="difficulty-selector">
