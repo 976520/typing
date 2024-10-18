@@ -1,11 +1,5 @@
 <script>
-  let textList = [
-    "The quick brown fox jumps over the lazy dog",
-    "Svelte is a powerful tool for building interactive UIs",
-    "Typing fast requires practice and precision",
-    "Developers enjoy writing clean and efficient code",
-    "A journey of a thousand miles begins with a single step"
-  ];
+  let textList = [];
   
   let text = textList[0];
   let input = "";
@@ -47,20 +41,21 @@
   }
 
   function checkInput() {
-    totalTyped++; 
+    totalTyped = input.length; 
     if (input.trim() === text) {
-      score += 10; 
-      correctTyped += text.length; 
-      selectRandomText();
-      input = "";
-      currentIndex = 0;
+        score += 10; 
+        correctTyped += text.length; 
+        selectRandomText();
+        input = "";
+        currentIndex = 0;
     } else if (input[currentIndex] === text[currentIndex]) {
-      currentIndex++;
-      correctTyped++; 
+        currentIndex++;
+        correctTyped++; 
     } else {
-      score--; 
+        score--; 
     }
   }
+
 
   function selectRandomText() {
     text = textList[Math.floor(Math.random() * textList.length)];
@@ -77,15 +72,14 @@
       ];
     } else if (difficulty === "short_sentence") {
       textList = [
-        "The quick brown fox jumps over the lazy dog",
-        "Typing fast requires practice and precision",
-        "A journey of a thousand miles begins with a single step"
+        "I take a look at my life and realize there's nothin' left",
+        "Listening to my heart instead of my head",
+        "I have these lucid dreams where I can't move a thing"
       ];
     } else if (difficulty === "long_sentence") {
       textList = [
-        "Svelte is a powerful tool for building interactive UIs",
-        "Developers enjoy writing clean and efficient code",
-        "JavaScript frameworks evolve rapidly, changing the landscape"
+        "Svelte is a powerful tool",
+        "Svelte is a super tool"
       ];
     }
     selectRandomText();
