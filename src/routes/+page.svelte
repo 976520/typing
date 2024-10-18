@@ -74,15 +74,24 @@
       ];
     } else if (difficulty === "short_sentence") {
       textList = [
+        "Pop another drugs different color",
+        "Never was much of a romantic",
         "I take a look at my life and realize there's nothin' left",
-        "Listening to my heart instead of my head",
-        "I have these lucid dreams where I can't move a thing",
-        "I'm representing for them gangstas all across the world"
+        "I'm that cat by the bar toastin' to the good life",
+        "You can find me in the club, bottle full of bub'",
+        "I'm representing for them gangstas all across the world",
+        "You been putting up with my shit just way too long",
+        "So I think it's time for us to have a toast",
+        "Let's have a toast for the douchebags",
+        "I've been fuckin' hoes and poppin' pillies",
+        "Man, I feel just like a rockstar",
+        "Cocaine on the table, liquor pourin'",
+        "Don't give a damn, dude, your girlfriend is a groupie"
       ];
     } else if (difficulty === "long_sentence") {
       textList = [
         "Since the last time you heard from me, I lost some friends. Well, hell, me and Snoop, we dippin' again. Kept my ear to the streets, signed Eminem. He's triple platinum, doing 50 a week.",
-        "Svelte is a super tool for building web applications."
+        "I still see your shadows in my room. Can't take back the love that I gave you. It's to the point where I love and I hate you. And I cannot change you so I must replace you."
       ];
     }
     selectRandomText();
@@ -103,15 +112,18 @@
 </script>
 
 <style>
+
   .container {
     text-align: center;
     padding: 2rem;
   }
   .text {
+    font-family: Consolas;
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
   .input-area {
+    font-family: Consolas;
     font-size: 1.2rem;
     margin-bottom: 1rem;
   }
@@ -152,17 +164,18 @@
       autofocus
     />
   {/if}
-
-  <div class="score">Score: {score}</div>
-  <div class="timer">Time: {timeLeft}</div>
-  <div class="stats">
-    정확도: {calculateAccuracy()}% <br>
-    {calculateWPM()} WPM
-  </div>
+  <br/>
   {#if !gameStarted}
     <button on:click={startGame}>시작</button>
   {/if}
   {#if gameStarted}
     <button on:click={endGame}>그만</button>
   {/if}
+  <div class="score">Score: {score}</div>
+  <div class="timer">Time: {timeLeft}</div>
+  <div class="stats">
+    정확도: {calculateAccuracy()}% <br>
+    {calculateWPM()} WPM
+  </div>
+
 </div>
