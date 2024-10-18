@@ -114,6 +114,8 @@
 <style>
 
   .container {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     padding: 2rem;
   }
@@ -121,6 +123,8 @@
     font-family: Consolas;
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    width: 50rem;
+    justify-self: center;
   }
   .input-area {
     font-family: Consolas;
