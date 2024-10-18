@@ -117,7 +117,9 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
     padding: 2rem;
+    justify-content: center;
   }
   .text {
     font-family: Consolas;
@@ -130,6 +132,7 @@
     font-family: Consolas;
     font-size: 1.2rem;
     margin-bottom: 1rem;
+    width: 50rem;
   }
   .score {
     font-size: 1.2rem;
