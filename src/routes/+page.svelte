@@ -1,10 +1,12 @@
 <script>
+  // @ts-ignore
   let textList = [];
   let text = "";
   let input = "";
   let currentIndex = 0;
   let timeLeft = 60;
   let gameStarted = false;
+
   let interval;
   let totalTyped = 0; 
   let correctTyped = 0; 
@@ -97,7 +99,7 @@
 
   function calculateWPM() {
     const timeInMinutes = (60 - timeLeft) / 60;
-    const wordsTyped = totalTyped / 5; // 한 단어당 평균 5글자
+    const wordsTyped = totalTyped / 5;
     return timeInMinutes > 0 ? (wordsTyped / timeInMinutes).toFixed(2) : "0.00";
   }
 
