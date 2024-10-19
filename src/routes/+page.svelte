@@ -34,10 +34,9 @@
     ]
   };
 
-  $: selectTextByDifficulty();
-
   function startGame() {
     resetGame();
+    selectTextByDifficulty();
     gameStarted = true;
     interval = setInterval(updateTime, 1000);
   }
