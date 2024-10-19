@@ -6,14 +6,14 @@
   let timeLeft = 60;
   let gameStarted = false;
 
-  let interval: number | undefined;
+  let interval: number | undefined; 
   let totalTyped = 0; 
   let correctTyped = 0; 
   let difficulty = "short_sentence"; 
   
   const DIFFICULTY_TEXTS = {
     word: [
-      "Javascript", "Java", "Python", "Int", "String", "Boolean", "Double", "Float", "Computer science", "Binary tree", "Class", "Object", "Module", "Stack", "Depth first search", "Breadth first search", "Back"
+      "Javascript", "Java", "Python", "Int", "String", "Boolean", "Double", "Float", "Computer science", "Binary tree", "Class", "Object", "Module", "Stack", "Depth first search", "Breadth first search"
     ],
     short_sentence: [
       "Pop another drugs different color", "Never was much of a romantic",
@@ -48,12 +48,16 @@
     timeLeft = 60;
     totalTyped = 0;
     correctTyped = 0;
-    clearInterval(interval);
+    if (interval !== undefined) {
+      clearInterval(interval);
+    }
   }
 
   function endGame() {
     gameStarted = false;
-    clearInterval(interval);
+    if (interval !== undefined) {
+      clearInterval(interval);
+    }
   }
 
   function updateTime() {
@@ -64,18 +68,19 @@
     }
   }
 
-  function checkInput() {
+  function checkInput(event: InputEvent) {
+    const target = event.target as HTMLDivElement;
+    input = target.innerText;
     totalTyped = input.length;
 
     if (input === text.substring(0, input.length)) {
       correctTyped = input.length;
     }
-    
+
     if (input.trim() === text.trim()) {
       loadNewText();
     }
   }
-
 
   function loadNewText() {
     input = "";
@@ -101,7 +106,6 @@
     const wordsTyped = totalTyped / 5;
     return timeInMinutes > 0 ? (wordsTyped / timeInMinutes).toFixed(2) : "0.00";
   }
-
 </script>
 
 <style>
@@ -129,23 +133,26 @@
     background-color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     color: #333;
+    white-space: pre-wrap;
   }
 
   .input-area {
     font-family: 'Consolas', monospace;
-    font-size: 1.4rem;
-    padding: 0.8rem;
-    border: 2px solid #3498db;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
     width: 100%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: border-color 0.3s ease-in-out;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    caret-color: #3498db;
   }
 
-  .input-area:focus {
-    border-color: #2980b9;
-    outline: none;
+  .correct {
+    color: #2ecc71;
+  }
+
+  .incorrect {
+    color: #e74c3c;
   }
 
   button {
@@ -216,17 +223,9 @@
     </select>
   </div>
 
-  <div class="text">{text}</div>
-  
-  {#if gameStarted}
-    <input
-      class="input-area"
-      bind:value={input}
-      on:input={checkInput}
-      placeholder="Type here..."
-      autofocus
-    />
-  {/if}
+  <div class="text" contenteditable={gameStarted} on:input={checkInput}>
+    {text}
+  </div>
   
   {#if !gameStarted}
     <button on:click={startGame}>시작</button>
