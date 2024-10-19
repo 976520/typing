@@ -13,8 +13,7 @@
   let accuracy = writable(100);
   let totalTyped = 0;
   let correctTyped = 0;
-  let typedWords = writable([]);
-  let wpm = writable(0);
+    let wpm = writable(0);
 
   onMount(() => {
     resetGame();
@@ -45,8 +44,7 @@
     totalTyped = 0;
     correctTyped = 0;
     wpm.set(0);
-    typedWords.set([]);
-    isGameActive = false;
+        isGameActive = false;
     clearInterval(timer);
   }
 
@@ -163,11 +161,5 @@
     <p>Accuracy: {$accuracy}%</p>
     <p>WPM: {$wpm}</p>
   </div>
-  <div class="typing-history">
-    <h3>Typed Words History:</h3>
-    {#each $typedWords as word}
-      <p>{word}</p>
-    {/each}
-  </div>
-  <button class="reset-button" on:click={resetGame}>Reset Game</button>
+    <button class="reset-button" on:click={resetGame}>Reset Game</button>
 </div>
