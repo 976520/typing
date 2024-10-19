@@ -13,7 +13,7 @@
   
   const DIFFICULTY_TEXTS = {
     word: [
-      "Javascript", "Java", "Python", "Int", "String", "Boolean", "Double", "Float", "Computer science", "Binary tree", "Class", "Object", "Module", "Stack", "Depth first search", "Breadth first search"
+      "Javascript", "Java", "Python", "Int", "String", "Boolean", "Double", "Float", "Computer science", "Binary tree", "Class", "Object", "Module", "Stack", "Depth first search", "Breadth first search", "Back"
     ],
     short_sentence: [
       "Pop another drugs different color", "Never was much of a romantic",
@@ -69,13 +69,19 @@
   }
 
   function checkInput(event: InputEvent) {
-    const target = event.target as HTMLDivElement;
-    input = target.innerText;
+    const target = event.target as HTMLInputElement;
+    input = target.value;
     totalTyped = input.length;
 
-    if (input === text.substring(0, input.length)) {
-      correctTyped = input.length;
+    let correctCharacters = 0;
+    for (let i = 0; i < input.length; i++) {
+      if (input[i] === text[i]) {
+        correctCharacters++;
+      } else {
+        break;
+      }
     }
+    correctTyped = correctCharacters;
 
     if (input.trim() === text.trim()) {
       loadNewText();
@@ -141,9 +147,11 @@
     font-size: 1.6rem;
     width: 100%;
     padding: 1rem;
-    border: none;
+    border: 2px solid #3498db;
+    border-radius: 10px;
     outline: none;
-    background: transparent;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     caret-color: #3498db;
   }
 
@@ -223,9 +231,18 @@
     </select>
   </div>
 
-  <div class="text" contenteditable={gameStarted} on:input={checkInput}>
+  <div class="text">
     {text}
   </div>
+
+  <input 
+    class="input-area" 
+    type="text" 
+    bind:value={input} 
+    on:input={checkInput} 
+    placeholder="Type here..." 
+    autofocus
+  />
   
   {#if !gameStarted}
     <button on:click={startGame}>시작</button>
