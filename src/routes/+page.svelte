@@ -1,13 +1,12 @@
-<script>
-  // @ts-ignore
-  let textList = [];
+<script lang="ts">
+  let textList: string[] = [];
   let text = "";
   let input = "";
   let currentIndex = 0;
   let timeLeft = 60;
   let gameStarted = false;
 
-  let interval;
+  let interval: number | undefined;
   let totalTyped = 0; 
   let correctTyped = 0; 
   let difficulty = "short_sentence"; 
