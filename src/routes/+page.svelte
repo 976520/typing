@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   let textList: string[] = [];
   let text = "";
   let input = "";
-  let currentIndex = 0;
   let timeLeft = 60;
   let gameStarted = false;
 
@@ -35,17 +36,19 @@
     ]
   };
 
+  onMount(() => {
+    selectTextByDifficulty();
+  });
+
   function startGame() {
     resetGame();
     selectTextByDifficulty();
     gameStarted = true;
     interval = setInterval(updateTime, 1000);
-    document.querySelector('.text')!.innerHTML = formatTextWithSpans(text);
   }
 
   function resetGame() {
     input = "";
-    currentIndex = 0;
     timeLeft = 60;
     totalTyped = 0;
     correctTyped = 0;
@@ -64,29 +67,22 @@
   function updateTime() {
     if (timeLeft > 0) {
       timeLeft--;
-    } 
+    } else {
+      endGame();
+    }
   }
+
+  $: formattedText = formatTextWithSpans(text);
 
   function checkInput() {
     totalTyped = input.length;
-    let correctCharacters = 0;
-    let formattedText = "";
+    correctTyped = 0;
 
-    for (let i = 0; i < text.length; i++) {
-      if (i < input.length) {
-        if (input[i] === text[i]) {
-          formattedText += `<span class='correct'>$&</span>`;
-          correctCharacters++;
-        } else {
-          formattedText += `<span class='incorrect'>$&</span>`;
-        }
-      } else {
-        formattedText += `<span>${text[i]}</span>`;
+    for (let i = 0; i < input.length; i++) {
+      if (input[i] === text[i]) {
+        correctTyped++;
       }
     }
-
-    document.querySelector('.text')!.innerHTML = formattedText;
-    correctTyped = correctCharacters;
 
     if (input.trim() === text.trim()) {
       loadNewText();
@@ -95,9 +91,7 @@
 
   function loadNewText() {
     input = "";
-    currentIndex = 0;
     selectRandomText();
-    document.querySelector('.text')!.innerHTML = formatTextWithSpans(text);
   }
 
   function selectRandomText() {
@@ -120,7 +114,17 @@
   }
 
   function formatTextWithSpans(text: string) {
-    return text.split('').map(char => `<span>${char}</span>`).join('');
+    return text.split('').map((char, index) => {
+      if (index < input.length) {
+        if (input[index] === char) {
+          return `<span class='correct'>${char}</span>`;
+        } else {
+          return `<span class='incorrect'>${char}</span>`;
+        }
+      } else {
+        return `<span>${char}</span>`;
+      }
+    }).join('');
   }
 </script>
 
@@ -242,7 +246,7 @@
   </div>
 
   {#if gameStarted}
-    <div class="text"></div>
+    <div class="text">{@html formattedText}</div>
 
     <input 
       class="input-area" 
