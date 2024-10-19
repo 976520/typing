@@ -231,18 +231,20 @@
     </select>
   </div>
 
-  <div class="text">
-    {text}
-  </div>
+  {#if gameStarted}
+    <div class="text">
+      {text}
+    </div>
 
-  <input 
-    class="input-area" 
-    type="text" 
-    bind:value={input} 
-    on:input={checkInput} 
-    placeholder="Type here..." 
-    autofocus
-  />
+    <input 
+      class="input-area" 
+      type="text" 
+      bind:value={input} 
+      on:input={checkInput} 
+      placeholder="Type here..." 
+      autofocus
+    />
+  {/if}
   
   {#if !gameStarted}
     <button on:click={startGame}>시작</button>
