@@ -64,15 +64,17 @@
   }
 
   function checkInput() {
-    totalTyped = input.length; 
-    if (input.trim() === text) {
-      correctTyped += text.length;
+    totalTyped = input.length;
+
+    if (input === text.substring(0, input.length)) {
+      correctTyped = input.length;
+    }
+    
+    if (input.trim() === text.trim()) {
       loadNewText();
-    } else if (input[currentIndex] === text[currentIndex]) {
-      currentIndex++;
-      correctTyped++;
     }
   }
+
 
   function loadNewText() {
     input = "";
@@ -95,8 +97,10 @@
 
   function calculateWPM() {
     const timeInMinutes = (60 - timeLeft) / 60;
-    return timeInMinutes > 0 ? ((totalTyped / 5) / timeInMinutes).toFixed(2) : "0.00";
+    const wordsTyped = totalTyped / 5; // 한 단어당 평균 5글자
+    return timeInMinutes > 0 ? (wordsTyped / timeInMinutes).toFixed(2) : "0.00";
   }
+
 </script>
 
 <style>
