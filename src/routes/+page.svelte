@@ -3,7 +3,6 @@
   let text = "";
   let input = "";
   let currentIndex = 0;
-  let score = 0;
   let timeLeft = 60;
   let gameStarted = false;
   let interval;
@@ -45,7 +44,6 @@
   function resetGame() {
     input = "";
     currentIndex = 0;
-    score = 0;
     timeLeft = 60;
     totalTyped = 0;
     correctTyped = 0;
@@ -68,14 +66,11 @@
   function checkInput() {
     totalTyped = input.length; 
     if (input.trim() === text) {
-      score += 10; 
       correctTyped += text.length;
       loadNewText();
     } else if (input[currentIndex] === text[currentIndex]) {
       currentIndex++;
       correctTyped++;
-    } else {
-      score--; 
     }
   }
 
@@ -170,18 +165,19 @@
     transform: translateY(0);
   }
 
-  .score, .timer, .stats {
+  .timer, .stats {
+    cursor: default;
     font-size: 1.3rem;
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    background: linear-gradient(45deg, #85d8ce, #0974b5);
+    background: linear-gradient(45deg, #4a6faf, #0974b5);
     color: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
   }
 
-  .score:hover, .timer:hover, .stats:hover {
+  .timer:hover, .stats:hover {
     transform: translateY(-2px);
   }
 
@@ -204,7 +200,6 @@
     outline: none;
   }
 </style>
-
 
 <div class="container">
   <div class="difficulty-selector">
@@ -236,7 +231,6 @@
     <button on:click={endGame}>그만</button>
   {/if}
   
-  <div class="score">Score: {score}</div>
   <div class="timer">Time: {timeLeft}</div>
   <div class="stats">
     정확도: {calculateAccuracy()}% <br>
