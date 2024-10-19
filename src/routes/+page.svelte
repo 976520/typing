@@ -40,6 +40,7 @@
     selectTextByDifficulty();
     gameStarted = true;
     interval = setInterval(updateTime, 1000);
+    document.querySelector('.text')!.innerHTML = text;
   }
 
   function resetGame() {
@@ -63,24 +64,27 @@
   function updateTime() {
     if (timeLeft > 0) {
       timeLeft--;
-    } else {
-      endGame();
-    }
+    } 
   }
 
-  function checkInput(event: InputEvent) {
-    const target = event.target as HTMLInputElement;
-    input = target.value;
+  function checkInput() {
     totalTyped = input.length;
-
     let correctCharacters = 0;
+    let formattedText = "";
+
     for (let i = 0; i < input.length; i++) {
-      if (input[i] === text[i]) {
-        correctCharacters++;
-      } else {
-        break;
+      if (i < text.length) {
+        if (input[i] === text[i]) {
+          formattedText += `<span class='correct'>${text[i]}</span>`;
+          correctCharacters++;
+        } else {
+          formattedText += `<span class='incorrect'>${text[i]}</span>`;
+        }
       }
     }
+
+    formattedText += text.slice(input.length);
+    document.querySelector('.text')!.innerHTML = formattedText;
     correctTyped = correctCharacters;
 
     if (input.trim() === text.trim()) {
@@ -92,6 +96,7 @@
     input = "";
     currentIndex = 0;
     selectRandomText();
+    document.querySelector('.text')!.innerHTML = text;
   }
 
   function selectRandomText() {
@@ -232,9 +237,7 @@
   </div>
 
   {#if gameStarted}
-    <div class="text">
-      {text}
-    </div>
+    <div class="text">{text}</div>
 
     <input 
       class="input-area" 
