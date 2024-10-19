@@ -3,7 +3,7 @@
   import { writable } from 'svelte/store';
 
   let wordList = [
-    "apple", "banana", "orange", "grape", "cherry", "strawberry", "watermelon", "pineapple", "blueberry", "mango"
+    "int", "float", "double", "import", "function", "class", "method", "filed", "script", "string"
   ];
   let inputText = "";
   let currentWordIndex = 0;
@@ -81,16 +81,13 @@
   }
   .word {
     font-size: 36px;
-    font-weight: bold;
     color: #ff6347;
     padding: 10px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute; 
+    left: 0%;
     pointer-events: none;
     z-index: 1;
     font-family: 'Consolas', monospace;
@@ -101,7 +98,7 @@
     padding: 10px;
     width: 300px;
     border: none;
-    text-align: center;
+    text-align: left;
     background: transparent;
     outline: none;
     position: relative;
@@ -136,7 +133,7 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
+    text-align: center;
     width: 60%;
     margin: 20px auto;
     font-family: 'Consolas', monospace;
@@ -144,7 +141,6 @@
 </style>
 
 <div class="container">
-  <h1>Typing Works</h1>
   <div class="word-input-container">
     <div class="word">{wordList[currentWordIndex]}</div>
     <input
