@@ -40,7 +40,7 @@
     selectTextByDifficulty();
     gameStarted = true;
     interval = setInterval(updateTime, 1000);
-    document.querySelector('.text')!.innerHTML = text;
+    document.querySelector('.text')!.innerHTML = formatTextWithSpans(text);
   }
 
   function resetGame() {
@@ -72,18 +72,19 @@
     let correctCharacters = 0;
     let formattedText = "";
 
-    for (let i = 0; i < input.length; i++) {
-      if (i < text.length) {
+    for (let i = 0; i < text.length; i++) {
+      if (i < input.length) {
         if (input[i] === text[i]) {
-          formattedText += `<span class='correct'>${text[i]}</span>`;
+          formattedText += `<span class='correct'>$&</span>`;
           correctCharacters++;
         } else {
-          formattedText += `<span class='incorrect'>${text[i]}</span>`;
+          formattedText += `<span class='incorrect'>$&</span>`;
         }
+      } else {
+        formattedText += `<span>${text[i]}</span>`;
       }
     }
 
-    formattedText += text.slice(input.length);
     document.querySelector('.text')!.innerHTML = formattedText;
     correctTyped = correctCharacters;
 
@@ -96,7 +97,7 @@
     input = "";
     currentIndex = 0;
     selectRandomText();
-    document.querySelector('.text')!.innerHTML = text;
+    document.querySelector('.text')!.innerHTML = formatTextWithSpans(text);
   }
 
   function selectRandomText() {
@@ -116,6 +117,10 @@
     const timeInMinutes = (60 - timeLeft) / 60;
     const wordsTyped = totalTyped / 5;
     return timeInMinutes > 0 ? (wordsTyped / timeInMinutes).toFixed(2) : "0.00";
+  }
+
+  function formatTextWithSpans(text: string) {
+    return text.split('').map(char => `<span>${char}</span>`).join('');
   }
 </script>
 
@@ -237,7 +242,7 @@
   </div>
 
   {#if gameStarted}
-    <div class="text">{text}</div>
+    <div class="text"></div>
 
     <input 
       class="input-area" 
