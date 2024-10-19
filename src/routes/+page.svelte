@@ -130,26 +130,26 @@
     
   }
   .word-input-container {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    position: relative; margin: 0 auto; display: flex; justify-content: center; align-items: center; height: auto;
     display: inline-block;
     font-family: 'Consolas', monospace;
   }
   .word {
-    font-size: 24px; font-weight: bold; width: 100%; max-width: 1200px; word-wrap: break-word; white-space: pre-wrap; overflow-wrap: break-word; text-align: left;
+    font-size: 24px; font-weight: bold; width: 90%; max-width: 800px; word-wrap: break-word; white-space: pre-wrap; overflow-wrap: break-word; text-align: center;
     color: #ff6347;
     padding: 10px 0;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -40%); 
+    position: relative; display: flex; justify-content: center; align-items: center; width: 100%; 
     pointer-events: none;
     z-index: 1;
     font-family: 'Consolas', monospace;
   }
   .input-overlay {
     font-size: 24px;
-    padding: 40px;
-    width: 100%; max-width: 1000px; height: auto;
+    padding: 15px;
+    width: 100%; max-width: 800px; height: auto;
     border: none;
     text-align: left;
     background: transparent;
