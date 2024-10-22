@@ -54,6 +54,16 @@
   $: if (userInput === text) {
     finishTyping();
   }
+
+  function getColoredText() {
+    return [...userInput].map((char, index) => {
+      if (char === text[index]) {
+        return `<span style="color: blue;">${char}</span>`;
+      } else {
+        return `<span style="color: red;">${char}</span>`;
+      }
+    }).join('');
+  }
 </script>
 
 <style>
@@ -112,6 +122,12 @@
   button:hover {
     background-color: #0056b3;
   }
+
+  .colored-text {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+  }
 </style>
 
 <main>
@@ -122,13 +138,15 @@
     placeholder="Type here..."
     disabled={isFinished}
   ></textarea>
+  <div class="colored-text"></div>
+  {@html getColoredText()}
   <div class="metrics">
     <p>WPM: {wpm.toFixed(2)}</p>
     <p>CPM: {cpm.toFixed(2)}</p>
     <p>Accuracy: {accuracy.toFixed(2)}%</p>
   </div>
   {#if isFinished}
-    <p>You finished typing in {(endTime.getTime() - startTime.getTime()) / 1000} seconds.</p>
+    <p>{(endTime.getTime() - startTime.getTime()) / 1000} s</p>
     <button on:click={resetTyping}>Re?</button>
   {/if}
 </main>
