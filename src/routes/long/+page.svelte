@@ -83,7 +83,9 @@
   }
 </script>
 
-<link rel="stylesheet" href="/lib/css/style.css"/>
+<style>
+  @import '../../lib/css/style.css';
+</style>
 
 <main>
   <h1 class="colored-text">{@html getColoredText()}</h1>
