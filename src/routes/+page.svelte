@@ -1,5 +1,5 @@
-<script>
-  function getSource(index) {
+<script lang="ts">
+  function getSource(index: number) {
     const sources = [
       "Jay-Z - Moment of Clarity",
       "Jay-Z - Moment of Clarity",
@@ -63,12 +63,12 @@
   let inputText = "";
   let currentWordIndex = 0;
   let timeLeft = writable(60);
-  let timer;
+  let timer: ReturnType<typeof setInterval>;
   let isGameActive = false;
   let accuracy = writable(100);
   let totalTyped = 0;
   let correctTyped = 0;
-    let wpm = writable(0);
+  let wpm = writable(0);
 
   onMount(() => {
     resetGame();
@@ -99,8 +99,8 @@
     totalTyped = 0;
     correctTyped = 0;
     wpm.set(0);
-        isGameActive = false;
-    clearInterval(timer);
+    isGameActive = false;
+    if (timer) clearInterval(timer);
   }
 
   function checkInput() {
@@ -110,8 +110,10 @@
       currentWordIndex = (currentWordIndex + 1) % wordList.length;
       inputText = "";
     }
-    accuracy.set(Math.round((correctTyped / totalTyped) * 100));
-    wpm.set(Math.round((correctTyped / (60 - $timeLeft)) * 60));
+    if (totalTyped > 0) {
+      accuracy.set(Math.round((correctTyped / totalTyped) * 100));
+      wpm.set(Math.round((correctTyped / (60 - $timeLeft)) * 60));
+    }
   }
 
   function endGame() {
