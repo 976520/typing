@@ -8,6 +8,8 @@
   let wpm = 0;
   let cpm = 0;
   let accuracy = 0;
+  let correct = 0;
+  let incorrect = 0;
 
   function startTyping() {
     if (!isStarted) {
@@ -31,13 +33,17 @@
     wpm = 0;
     cpm = 0;
     accuracy = 0;
+    correct = 0;
+    incorrect = 0;
   }
 
   function calculateMetrics() {
     if (!isStarted) return;
 
     const currentTime = isFinished ? endTime : new Date();
-    const timeTakenMinutes = (currentTime.getTime() - startTime.getTime()) / 1000 / 60;
+    const timeTakenMilliseconds = currentTime.getTime() - startTime.getTime();
+    const timeTakenSeconds = timeTakenMilliseconds / 1000;
+    const timeTakenMinutes = timeTakenSeconds / 60;
     const wordsTyped = userInput.split(" ").length;
     const charactersTyped = userInput.length;
     const correctCharacters = [...userInput].filter((char, index) => char === text[index]).length;
@@ -45,6 +51,8 @@
     wpm = wordsTyped / timeTakenMinutes;
     cpm = charactersTyped / timeTakenMinutes;
     accuracy = (correctCharacters / text.length) * 100;
+    correct = correctCharacters;
+    incorrect = charactersTyped - correctCharacters;
   }
 
   $: if (isStarted && !isFinished) {
@@ -201,6 +209,8 @@
     <p>WPM: {wpm.toFixed(2)}</p>
     <p>CPM: {cpm.toFixed(2)}</p>
     <p>Accuracy: {accuracy.toFixed(2)}%</p>
+    <p>Correct: {correct}</p>
+    <p>Incorrect: {incorrect}</p>
   </div>
   {#if isFinished}
     <p>{(endTime.getTime() - startTime.getTime()) / 1000} s</p>
