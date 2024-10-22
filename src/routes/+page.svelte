@@ -136,14 +136,14 @@
 </style>
 
 <main>
-  <h1>{text}</h1>
+  <h1 class="colored-text">{@html getColoredText()}</h1>
   <textarea
     bind:value={userInput}
     on:input={() => { startTyping(); calculateMetrics(); }}
     placeholder="Type here..."
     disabled={isFinished}
   ></textarea>
-  <div class="colored-text">{@html getColoredText()}</div>
+  
   
   <div class="metrics">
     <p>WPM: {wpm.toFixed(2)}</p>
