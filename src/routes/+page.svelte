@@ -1,8 +1,12 @@
 <script>
-    import { nav } from '$app/navigation';
+    import { goto } from '$app/navigation';
     
     function navigateToShort() {
-        nav('/short');
+        goto('/short');
+    }
+
+    function navigateToLong() {
+        goto('/long');
     }
 </script>
 
@@ -30,6 +34,7 @@
     transition: background-color 0.3s ease;
     backdrop-filter: blur(10px);
     animation: fadeIn 1s ease-in-out;
+    margin-bottom: 20px;
   }
 
   button:hover {
@@ -40,5 +45,8 @@
 <main>
   <button on:click={navigateToShort}>
     짧은글연습
+  </button>
+  <button on:click={navigateToLong}>
+    긴글연습
   </button>
 </main>
