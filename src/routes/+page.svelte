@@ -82,7 +82,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Consolas', sans-serif;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     padding: 20px;
   }
