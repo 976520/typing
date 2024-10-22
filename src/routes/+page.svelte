@@ -1,5 +1,5 @@
 <script lang="ts">
-  let text = "The quick brown fox jumps over the lazy dog.";
+  let text = "Leave this shit in the past, but I want it to last.";
   let userInput = "";
   let startTime: Date;
   let endTime: Date;
@@ -56,13 +56,18 @@
   }
 
   function getColoredText() {
-    return [...userInput].map((char, index) => {
-      if (char === text[index]) {
-        return `<span style="color: blue;">${char}</span>`;
+    const coloredText = [...text].map((char, index) => {
+      if (index < userInput.length) {
+        if (char === userInput[index]) {
+          return `<span style="color: blue;">${char}</span>`;
+        } else {
+          return `<span style="color: red;">${char}</span>`;
+        }
       } else {
-        return `<span style="color: red;">${char}</span>`;
+        return `<span>${char}</span>`;
       }
     }).join('');
+    return coloredText;
   }
 </script>
 
@@ -138,8 +143,8 @@
     placeholder="Type here..."
     disabled={isFinished}
   ></textarea>
-  <div class="colored-text"></div>
-  {@html getColoredText()}
+  <div class="colored-text">{@html getColoredText()}</div>
+  
   <div class="metrics">
     <p>WPM: {wpm.toFixed(2)}</p>
     <p>CPM: {cpm.toFixed(2)}</p>
