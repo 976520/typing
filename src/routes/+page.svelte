@@ -119,7 +119,7 @@
   <textarea
     bind:value={userInput}
     on:input={() => { startTyping(); calculateMetrics(); }}
-    placeholder="Start typing here..."
+    placeholder="Type here..."
     disabled={isFinished}
   ></textarea>
   <div class="metrics">
@@ -129,6 +129,6 @@
   </div>
   {#if isFinished}
     <p>You finished typing in {(endTime.getTime() - startTime.getTime()) / 1000} seconds.</p>
-    <button on:click={resetTyping}>Try Again</button>
+    <button on:click={resetTyping}>Re?</button>
   {/if}
 </main>
