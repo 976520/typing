@@ -85,6 +85,7 @@
     font-family: 'Consolas', sans-serif;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     padding: 20px;
+    animation: fadeIn 1s ease-in-out;
   }
 
   h1 {
@@ -92,12 +93,14 @@
     margin-bottom: 1.5rem;
     color: #333;
     text-align: center;
+    animation: slideIn 1s ease-in-out;
   }
 
   p {
     font-size: 1.25rem;
     margin-bottom: 1rem;
     color: #333;
+    animation: fadeIn 1s ease-in-out;
   }
 
   textarea {
@@ -113,6 +116,8 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: #333;
     backdrop-filter: blur(10px);
+    outline: none;
+    animation: fadeIn 1s ease-in-out;
   }
 
   .metrics {
@@ -121,6 +126,7 @@
     width: 60%;
     margin-bottom: 1rem;
     color: #333;
+    animation: fadeIn 1s ease-in-out;
   }
 
   .metrics p {
@@ -137,6 +143,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     backdrop-filter: blur(10px);
+    animation: fadeIn 1s ease-in-out;
   }
 
   button:hover {
@@ -148,6 +155,7 @@
     margin-bottom: 1rem;
     white-space: pre-wrap;
     color: #333;
+    animation: fadeIn 1s ease-in-out;
   }
 
   .correct {
@@ -156,6 +164,26 @@
 
   .incorrect {
     color: #f44336;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 </style>
 
