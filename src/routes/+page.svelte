@@ -34,17 +34,17 @@
   }
 
   function calculateMetrics() {
-    if (isStarted) {
-      const currentTime = isFinished ? endTime : new Date();
-      const timeTaken = (currentTime.getTime() - startTime.getTime()) / 1000 / 60;
-      const wordsTyped = userInput.split(" ").length;
-      const charactersTyped = userInput.length;
-      const correctCharacters = userInput.split("").filter((char, index) => char === text[index]).length;
+    if (!isStarted) return;
 
-      wpm = wordsTyped / timeTaken;
-      cpm = charactersTyped / timeTaken;
-      accuracy = (correctCharacters / text.length) * 100;
-    }
+    const currentTime = isFinished ? endTime : new Date();
+    const timeTakenMinutes = (currentTime.getTime() - startTime.getTime()) / 1000 / 60;
+    const wordsTyped = userInput.split(" ").length;
+    const charactersTyped = userInput.length;
+    const correctCharacters = [...userInput].filter((char, index) => char === text[index]).length;
+
+    wpm = wordsTyped / timeTakenMinutes;
+    cpm = charactersTyped / timeTakenMinutes;
+    accuracy = (correctCharacters / text.length) * 100;
   }
 
   $: if (isStarted && !isFinished) {
