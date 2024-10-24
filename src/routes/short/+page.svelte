@@ -1,5 +1,19 @@
 <script lang="ts">
-  let text = "Leave this shit in the past, but I want it to last.";
+  
+  let sentences = [
+    "Leave this shit in the past, but I want it to last.",
+    "You left me falling and landing inside my grave.",
+    "I know that you want me dead.",
+    "I take prescriptions to make me feel a-okay.",
+    "I know it's all in my head.",
+    "I have these lucid dreams where I can't move a thing.",
+    "I was tangled up in your drastic ways.",
+    "Who knew evil girls have the prettiest face?",
+    "You gave me a heart that was full of mistakes.",
+    "I gave you my heart and you made heart break.",
+  ];
+
+  let text = sentences[Math.floor(Math.random() * sentences.length)];
   let userInput = "";
   let startTime: Date;
   let endTime: Date;
@@ -19,7 +33,7 @@
   }
 
   function finishTyping() {
-    if (userInput === text) {
+    if (userInput.trim() === text.trim()) {
       endTime = new Date();
       isFinished = true;
       calculateMetrics();
@@ -59,7 +73,7 @@
     calculateMetrics();
   }
 
-  $: if (userInput === text) {
+  $: if (userInput.trim() === text.trim()) {
     finishTyping();
   }
 
