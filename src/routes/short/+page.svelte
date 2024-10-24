@@ -40,7 +40,7 @@
     }
   }
 
-  function resetTyping() {
+  function resetTyping() {  
     userInput = "";
     isStarted = false;
     isFinished = false;
