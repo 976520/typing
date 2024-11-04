@@ -14,7 +14,7 @@
 	let incorrectChars: { [key: number]: Set<number> } = {};
 
 	const wordList: string[] = [
-		'function is gay', 'var is gay'
+		'I still see your shadows in my room. Can\'t take back the love that I gave you. It\'s to the point where I love and I hate you. And I cannot change you, so I must replace you.', 'var is gay'
 	];
 
 	function generateWords() {
