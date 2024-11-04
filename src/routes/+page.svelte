@@ -7,6 +7,7 @@
 	let startTime: number | null = null;
 	let isFinished: boolean = false;
 	let wpm: number = 0;
+	let cpm: number = 0;
 	let accuracy: number = 0;
 	let mistakes: number = 0;
 	let totalTyped: number = 0;
@@ -67,6 +68,7 @@
 	function finishTest() {
 		const timeElapsed: number = (Date.now() - startTime!) / 1000 / 60; 
 		wpm = Math.round((totalTyped / 5) / timeElapsed);
+		cpm = Math.round(totalTyped / timeElapsed);
 		accuracy = Math.round(((currentWordIndex - mistakes) / currentWordIndex) * 100);
 		isFinished = true;
 	}
@@ -78,6 +80,7 @@
 		startTime = null;
 		isFinished = false;
 		wpm = 0;
+		cpm = 0;
 		accuracy = 0;
 		mistakes = 0;
 		totalTyped = 0;
@@ -100,6 +103,10 @@
 				<div class="stat">
 					<span class="value">{wpm}</span>
 					<span class="label">WPM</span>
+				</div>
+				<div class="stat">
+					<span class="value">{cpm}</span>
+					<span class="label">CPM</span>
 				</div>
 				<div class="stat">
 					<span class="value">{accuracy}%</span>
