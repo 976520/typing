@@ -14,13 +14,11 @@
 	let incorrectChars: { [key: number]: Set<number> } = {};
 
 	const wordList: string[] = [
-		'function', 'var', 'let', 'const', 'if', 'else', 'for', 'while', 'do', 'switch',
-		'case', 'break', 'continue', 'return', 'try', 'catch', 'finally', 'throw', 'new',
-		'this', 'class', 'extends', 'super', 'constructor', 'get', 'set', 'static', 'async', 'await'
+		'function is gay', 'var is gay'
 	];
 
 	function generateWords() {
-		words = Array(40).fill('').map(() => wordList[Math.floor(Math.random() * wordList.length)]);
+		words = Array(1).fill('').map(() => wordList[Math.floor(Math.random() * wordList.length)]);
 	}
 
 	function handleInput(event: KeyboardEvent) {
@@ -38,7 +36,7 @@
 			} else {
 				mistakes++;
 				incorrectChars[currentWordIndex] = new Set();
-				for (let i = 0; i < typedWord.length; i++) {
+				for (let i = 0; i < correctWord.length; i++) {
 					if (typedWord[i] !== correctWord[i]) {
 						incorrectChars[currentWordIndex].add(i);
 					}
@@ -120,13 +118,21 @@
 			<div class="words">
 				{#each words as word, wordIndex}
 					<div class="word {wordIndex === currentWordIndex ? 'current' : ''} {wordIndex < currentWordIndex ? 'completed' : ''}">
-						{#each word.split('') as char, charIndex}
-							<span class="char {getCharClass(wordIndex, charIndex, char)}">{char}</span>
+						{#each word.split(' ') as part, partIndex}
+							<span class="part">{part}</span>
+							{#if partIndex < word.split(' ').length - 1}
+								<span class="space"> </span>
+							{/if}
 						{/each}
 						{#if wordIndex === currentWordIndex}
 							<div class="word-input">
-								{#each currentInput.split('') as char, charIndex}
-									<span class="char-input {char === word[charIndex] ? 'correct' : 'incorrect'}">{char}</span>
+								{#each currentInput.split(' ') as part, partIndex}
+									{#each part.split('') as char, charIndex}
+										<span class="char-input {char === word.split(' ')[partIndex][charIndex] ? 'correct' : 'incorrect'}">{char}</span>
+									{/each}
+									{#if partIndex < currentInput.split(' ').length - 1}
+										<span class="space-input"> </span>
+									{/if}
 								{/each}
 							</div>
 						{/if}
@@ -190,9 +196,13 @@
 		color: #98c379;
 	}
 
-	.char {
+	.part {
 		position: relative;
 		z-index: 1;
+	}
+
+	.space {
+		margin: 0 0.2em;
 	}
 
 	.word-input {
@@ -210,6 +220,10 @@
 	.char-input.incorrect {
 		color: #e06c75;
 		background: rgba(224, 108, 117, 0.1);
+	}
+
+	.space-input {
+		margin: 0 0.2em;
 	}
 
 	.input {
