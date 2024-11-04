@@ -21,24 +21,24 @@
 		words = Array(40).fill('').map(() => wordList[Math.floor(Math.random() * wordList.length)]);
 	}
 
-	function handleInput(event: KeyboardEvent) {
+	function handleInput(event: Event) {
 		if (!startTime) startTime = Date.now();
 		
-		const input: string = (event.target as HTMLInputElement).value;
+		const input = (event.target as HTMLInputElement).value;
 		currentInput = input;
 
 		if (input.endsWith(' ')) {
-			const typedWord: string = input.trim();
-			const correctWord: string = words[currentWordIndex];
+			const typedWord = input.trim();
+			const correctWord = words[currentWordIndex];
 			
 			if (typedWord === correctWord) {
 				totalTyped += typedWord.length;
-				currentInput = ''; 
 			} else {
 				mistakes++;
 			}
 
 			currentWordIndex++;
+			currentInput = '';
 			
 			if (currentWordIndex >= words.length) {
 				finishTest();
@@ -57,7 +57,7 @@
 	function finishTest() {
 		const timeElapsed: number = (Date.now() - startTime!) / 1000 / 60; 
 		wpm = Math.round((totalTyped / 5) / timeElapsed);
-		accuracy = Math.min(Math.round(((currentWordIndex - mistakes) / currentWordIndex) * 100), 100);
+		accuracy = Math.round(((currentWordIndex - mistakes) / currentWordIndex) * 100);
 		isFinished = true;
 	}
 
@@ -79,7 +79,7 @@
 </script>
 
 <svelte:head>
-	<title>Typing Practice</title>
+	<title>Typing </title>
 </svelte:head>
 
 <div class="container">
@@ -119,8 +119,8 @@
 			<input
 				type="text"
 				bind:value={currentInput}
-				on:keyup={handleInput}
-				class="hidden-input"
+				on:input={handleInput}
+				class="input"
 				autocomplete="off"
 				autocapitalize="off"
 				spellcheck="false"
@@ -190,11 +190,12 @@
 		background: rgba(255, 0, 0, 0.1);
 	}
 
-	.hidden-input {
-		position: absolute;
-		left: -9999px;
-		top: -9999px;
-		opacity: 0;
+	.input {
+		width: 100%;
+		padding: 0.5rem;
+		font-size: 1rem;
+		border: 1px solid #ccc;
+		border-radius: 4px;
 	}
 
 	.results {
