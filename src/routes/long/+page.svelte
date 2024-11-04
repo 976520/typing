@@ -52,17 +52,6 @@
 		}
 	}
 
-	function getCharClass(wordIndex: number, charIndex: number, char: string): string {
-		if (wordIndex === currentWordIndex) {
-			const inputChar: string | undefined = currentInput[charIndex];
-			if (inputChar === undefined) return '';
-			return inputChar === char ? 'correct' : 'incorrect';
-		} else if (wordIndex < currentWordIndex && incorrectChars[wordIndex]?.has(charIndex)) {
-			return 'incorrect';
-		}
-		return '';
-	}
-
 	function finishTest() {
 		const timeElapsed: number = (Date.now() - startTime!) / 1000 / 60; 
 		wpm = Math.round((totalTyped / 5) / timeElapsed);
@@ -117,7 +106,8 @@
 		<div class="typing-area">
 			<div class="words">
 				{#each words as word, wordIndex}
-					<div class="word {wordIndex === currentWordIndex ? 'current' : ''} {wordIndex < currentWordIndex ? 'completed' : ''}">
+					<div class="word {wordIndex === currentWordIndex ? 'current' : ''} 
+						{wordIndex < currentWordIndex ? 'completed' : ''}">
 						{#each word.split(' ') as part, partIndex}
 							<span class="part">{part}</span>
 							{#if partIndex < word.split(' ').length - 1}
@@ -127,9 +117,11 @@
 						{#if wordIndex === currentWordIndex}
 							<div class="word-input">
 								{#each currentInput.split(' ') as part, partIndex}
-									{#each part.split('') as char, charIndex}
-										<span class="char-input {char === word.split(' ')[partIndex][charIndex] ? 'correct' : 'incorrect'}">{char}</span>
-									{/each}
+									<div>
+										{#each part.split('') as char, charIndex}
+											<span class="char-input {char === word.split(' ')[partIndex]?.split('')[charIndex] ? 'correct' : 'incorrect'}">{char}</span>
+										{/each}
+									</div>
 									{#if partIndex < currentInput.split(' ').length - 1}
 										<span class="space-input"> </span>
 									{/if}
