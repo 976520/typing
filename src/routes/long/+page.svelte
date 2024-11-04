@@ -178,7 +178,7 @@
 		font-size: 1.5rem;
 		line-height: 2;
 		display: flex;
-		flex-wrap: wrap;
+		flex-direction: column;
 		gap: 0.6rem;
 	}
 
@@ -186,6 +186,7 @@
 		position: relative;
 		color: #abb2bf;
 		display: flex;
+		flex-wrap: wrap;
 	}
 
 	.word.current {
@@ -211,6 +212,7 @@
 		top: 0;
 		z-index: 2;
 		display: flex;
+		flex-wrap: wrap;
 	}
 
 	.char-input {
