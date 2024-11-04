@@ -12,13 +12,13 @@
 	let totalTyped: number = 0;
 
 	const wordList: string[] = [
-		'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'I',
-		'it', 'for', 'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at',
-		'this', 'but', 'his', 'by', 'from', 'they', 'we', 'say', 'her', 'she'
+		'function', 'var', 'let', 'const', 'if', 'else', 'for', 'while', 'do', 'switch',
+		'case', 'break', 'continue', 'return', 'try', 'catch', 'finally', 'throw', 'new',
+		'this', 'class', 'extends', 'super', 'constructor', 'get', 'set', 'static', 'async', 'await'
 	];
 
 	function generateWords() {
-		words = Array(40).fill().map(() => wordList[Math.floor(Math.random() * wordList.length)]);
+		words = Array(40).fill('').map(() => wordList[Math.floor(Math.random() * wordList.length)]);
 	}
 
 	function handleInput(event: KeyboardEvent) {
