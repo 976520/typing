@@ -10,6 +10,7 @@
 	let accuracy: number = 0;
 	let mistakes: number = 0;
 	let totalTyped: number = 0;
+	let incorrectChars: { [key: number]: Set<number> } = {};
 
 	const wordList: string[] = [
 		'function', 'var', 'let', 'const', 'if', 'else', 'for', 'while', 'do', 'switch',
@@ -35,6 +36,12 @@
 				totalTyped += typedWord.length;
 			} else {
 				mistakes++;
+				incorrectChars[currentWordIndex] = new Set();
+				for (let i = 0; i < typedWord.length; i++) {
+					if (typedWord[i] !== correctWord[i]) {
+						incorrectChars[currentWordIndex].add(i);
+					}
+				}
 			}
 
 			currentWordIndex++;
@@ -47,11 +54,14 @@
 	}
 
 	function getCharClass(wordIndex: number, charIndex: number, char: string): string {
-		if (wordIndex !== currentWordIndex) return '';
-		
-		const inputChar: string | undefined = currentInput[charIndex];
-		if (inputChar === undefined) return '';
-		return inputChar === char ? 'correct' : 'incorrect';
+		if (wordIndex === currentWordIndex) {
+			const inputChar: string | undefined = currentInput[charIndex];
+			if (inputChar === undefined) return '';
+			return inputChar === char ? 'correct' : 'incorrect';
+		} else if (wordIndex < currentWordIndex && incorrectChars[wordIndex]?.has(charIndex)) {
+			return 'incorrect';
+		}
+		return '';
 	}
 
 	function finishTest() {
@@ -71,6 +81,7 @@
 		accuracy = 0;
 		mistakes = 0;
 		totalTyped = 0;
+		incorrectChars = {};
 	}
 
 	onMount(() => {
@@ -150,7 +161,7 @@
 	}
 
 	.words {
-		font-family: 'Fira Code', monospace;
+		font-family: 'consolas', monospace;
 		font-size: 1.5rem;
 		line-height: 2;
 		display: flex;
