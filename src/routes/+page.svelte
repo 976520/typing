@@ -85,7 +85,6 @@
 <div class="container">
 	{#if isFinished}
 		<div class="results">
-			<h2>Test Complete!</h2>
 			<div class="stats">
 				<div class="stat">
 					<span class="value">{wpm}</span>
@@ -96,7 +95,7 @@
 					<span class="label">Accuracy</span>
 				</div>
 			</div>
-			<button on:click={restart}>Restart Test</button>
+			<button on:click={restart}>Restart</button>
 		</div>
 	{:else}
 		<div class="typing-area">
