@@ -130,13 +130,18 @@
 </div>
 
 <style>
+	:global(body) {
+		background-color: #282c34;
+		color: #abb2bf;
+	}
+
 	.container {
 		max-width: 800px;
 		margin: 2rem auto;
 		padding: 2rem;
-		background: var(--color-bg-2);
+		background: #21252b;
 		border-radius: 8px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	}
 
 	.typing-area {
@@ -146,7 +151,7 @@
 	}
 
 	.words {
-		font-family: var(--font-mono);
+		font-family: 'Fira Code', monospace;
 		font-size: 1.5rem;
 		line-height: 2;
 		display: flex;
@@ -156,16 +161,16 @@
 
 	.word {
 		position: relative;
-		color: #666;
+		color: #abb2bf;
 		display: flex;
 	}
 
 	.word.current {
-		color: #666;
+		color: #e06c75;
 	}
 
 	.word.completed {
-		color: #999;
+		color: #98c379;
 	}
 
 	.char {
@@ -182,19 +187,21 @@
 	}
 
 	.char-input {
-		color: var(--color-theme-1);
+		color: #61afef;
 	}
 
 	.char-input.incorrect {
-		color: #ff3333;
-		background: rgba(255, 0, 0, 0.1);
+		color: #e06c75;
+		background: rgba(224, 108, 117, 0.1);
 	}
 
 	.input {
 		width: 100%;
 		padding: 0.5rem;
 		font-size: 1rem;
-		border: 1px solid #ccc;
+		background: #282c34;
+		color: #abb2bf;
+		border: 1px solid #abb2bf;
 		border-radius: 4px;
 	}
 
@@ -218,19 +225,19 @@
 	.value {
 		font-size: 2.5rem;
 		font-weight: bold;
-		color: var(--color-theme-1);
+		color: #61afef;
 	}
 
 	.label {
 		font-size: 0.9rem;
-		color: #666;
+		color: #abb2bf;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 	}
 
 	button {
-		background: var(--color-theme-1);
-		color: white;
+		background: #61afef;
+		color: #282c34;
 		border: none;
 		padding: 0.8rem 1.5rem;
 		font-size: 1rem;
@@ -240,6 +247,6 @@
 	}
 
 	button:hover {
-		background: #ff2e00;
+		background: #56b6c2;
 	}
 </style>
