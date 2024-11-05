@@ -70,7 +70,7 @@
 		wpm = 0;
 		cpm = 0;
 		accuracy = 0;
-		mistakes = 0;
+		mistakes = 0;	
 		totalTyped = 0;
 		incorrectChars = {};
 	}
