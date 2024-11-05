@@ -12,9 +12,9 @@ export interface TypingTest {
   incorrectChars: { [key: number]: Set<number> };
 }
 
-export function initializeTest(wordList: string[]): TypingTest {
+export function initializeTest(wordList: string[], wordCount: number): TypingTest {
   return {
-    words: generateWords(wordList),
+    words: generateWords(wordList, wordCount),
     currentInput: "",
     currentWordIndex: 0,
     startTime: null,
@@ -28,8 +28,8 @@ export function initializeTest(wordList: string[]): TypingTest {
   };
 }
 
-function generateWords(wordList: string[]): string[] {
-  return Array(40)
+function generateWords(wordList: string[], wordCount: number): string[] {
+  return Array(wordCount)
     .fill("")
     .map(() => wordList[Math.floor(Math.random() * wordList.length)]);
 }

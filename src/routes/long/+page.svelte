@@ -1,83 +1,52 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-  
-	let words: string[] = [];
-	let currentInput: string = '';
-	let currentWordIndex: number = 0;
-	let startTime: number | null = null;
-	let isFinished: boolean = false;
-	let wpm: number = 0;
-	let cpm: number = 0;
-	let accuracy: number = 0;
-	let mistakes: number = 0;
-	let totalTyped: number = 0;
-	let incorrectChars: { [key: number]: Set<number> } = {};
+	import { initializeTest, finishTest, type TypingTest } from '../common';
 
 	const wordList: string[] = [
 		'I still see your shadows in my room. Can\'t take back the love that I gave you. It\'s to the point where I love and I hate you. And I cannot change you, so I must replace you.', 
-    'Easier said than done. I thought you were the one. Listening to my heart instead of my head. You found another one, but I am the better one. I won\'t let you forget me.'
+		'Easier said than done. I thought you were the one. Listening to my heart instead of my head. You found another one, but I am the better one. I won\'t let you forget me.'
 	];
 
-	function generateWords() {
-		words = Array(1).fill('').map(() => wordList[Math.floor(Math.random() * wordList.length)]);
-	}
+	let test: TypingTest = initializeTest(wordList, 1);
 
 	function handleInput(event: KeyboardEvent) {
-		if (!startTime) startTime = Date.now();
+		if (!test.startTime) test.startTime = Date.now();
 		
 		const input = (event.target as HTMLInputElement).value;
-		currentInput = input;
+		test.currentInput = input;
 
 		if (event.key === 'Enter') {
-			const typedWord = currentInput.trim();
-			const correctWord = words[currentWordIndex];
+			const typedWord = input.trim();
+			const correctWord = test.words[test.currentWordIndex];
 			
 			if (typedWord === correctWord) {
-				totalTyped += typedWord.length;
+				test.totalTyped += typedWord.length;
 			} else {
-				mistakes++;
-				incorrectChars[currentWordIndex] = new Set();
+				test.mistakes++;
+				test.incorrectChars[test.currentWordIndex] = new Set();
 				for (let i = 0; i < correctWord.length; i++) {
 					if (typedWord[i] !== correctWord[i]) {
-						incorrectChars[currentWordIndex].add(i);
+						test.incorrectChars[test.currentWordIndex].add(i);
 					}
 				}
 			}
 
-			currentWordIndex++;
-			currentInput = '';
+			test.currentWordIndex++;
+			test.currentInput = '';
 			
-			if (currentWordIndex >= words.length) {
-				finishTest();
+			if (test.currentWordIndex >= test.words.length) {
+				finishTest(test);
 			}
 		}
 	}
 
-	function finishTest() {
-		const timeElapsed: number = (Date.now() - startTime!) / 1000 / 60; 
-		wpm = Math.round((totalTyped / 5) / timeElapsed);
-		cpm = Math.round(totalTyped / timeElapsed);
-		accuracy = Math.round(((currentWordIndex - mistakes) / currentWordIndex) * 100);
-		isFinished = true;
-	}
-
 	function restart() {
-		generateWords();
-		currentInput = '';
-		currentWordIndex = 0;
-		startTime = null;
-		isFinished = false;
-		wpm = 0;
-		cpm = 0;
-		accuracy = 0;
-		mistakes = 0;	
-		totalTyped = 0;
-		incorrectChars = {};
+		test = initializeTest(wordList, 1);
 	}
 
 	onMount(() => {
-		generateWords();
+		test = initializeTest(wordList, 1);
 	});
 </script>
 
@@ -86,19 +55,19 @@
 </svelte:head>
 
 <div class="container">
-	{#if isFinished}
+	{#if test.isFinished}
 		<div class="results">
 			<div class="stats">
 				<div class="stat">
-					<span class="value">{wpm}</span>
+					<span class="value">{test.wpm}</span>
 					<span class="label">WPM</span>
 				</div>
 				<div class="stat">
-					<span class="value">{cpm}</span>
+					<span class="value">{test.cpm}</span>
 					<span class="label">CPM</span>
 				</div>
 				<div class="stat">
-					<span class="value">{accuracy}%</span>
+					<span class="value">{test.accuracy}%</span>
 					<span class="label">Accuracy</span>
 				</div>
 			</div>
@@ -108,24 +77,24 @@
 	{:else}
 		<div class="typing-area">
 			<div class="words">
-				{#each words as word, wordIndex}
-					<div class="word {wordIndex === currentWordIndex ? 'current' : ''} 
-						{wordIndex < currentWordIndex ? 'completed' : ''}">
+				{#each test.words as word, wordIndex}
+					<div class="word {wordIndex === test.currentWordIndex ? 'current' : ''} 
+						{wordIndex < test.currentWordIndex ? 'completed' : ''}">
 						{#each word.split(' ') as part, partIndex}
 							<span class="part">{part}</span>
 							{#if partIndex < word.split(' ').length - 1}
 								<span class="space"> </span>
 							{/if}
 						{/each}
-						{#if wordIndex === currentWordIndex}
+						{#if wordIndex === test.currentWordIndex}
 							<div class="word-input">
-								{#each currentInput.split(' ') as part, partIndex}
+								{#each test.currentInput.split(' ') as part, partIndex}
 									<div>
 										{#each part.split('') as char, charIndex}
 											<span class="char-input {char === word.split(' ')[partIndex]?.split('')[charIndex] ? 'correct' : 'incorrect'}">{char}</span>
 										{/each}
 									</div>
-									{#if partIndex < currentInput.split(' ').length - 1}
+									{#if partIndex < test.currentInput.split(' ').length - 1}
 										<span class="space-input"> </span>
 									{/if}
 								{/each}
@@ -136,7 +105,7 @@
 			</div>
 			<input
 				type="text"
-				bind:value={currentInput}
+				bind:value={test.currentInput}
 				on:keydown={handleInput}
 				class="input"
 				autocomplete="off"
