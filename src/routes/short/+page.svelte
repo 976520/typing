@@ -14,7 +14,7 @@
 		'global', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'with', 'yield'
 	];
 
-	let test: TypingTest = initializeTest(wordList, 40);
+	let test: TypingTest = initializeTest(wordList, 20);
 
 	function handleInput(event: Event) {
 		if (!test.startTime) test.startTime = Date.now();
@@ -59,11 +59,11 @@
 	}
 
 	function restart() {
-		test = initializeTest(wordList, 40);
+		test = initializeTest(wordList, 20);
 	}
 
 	onMount(() => {
-		test = initializeTest(wordList, 40);
+		test = initializeTest(wordList, 20);
 	});
 </script>
 
