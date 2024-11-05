@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { initializeTest, finishTest, type TypingTest } from '../../lib/componets/common';
+	import { initializeTest, finishTest, type TypingTest } from '../../lib/components/commonn';
 
 	const wordList: string[] = [
 		'I still see your shadows in my room. Can\'t take back the love that I gave you. It\'s to the point where I love and I hate you. And I cannot change you, so I must replace you.', 
