@@ -102,6 +102,7 @@
 				</div>
 			</div>
 			<button on:click={restart}>Restart</button>
+      <button on:click={() => goto('/')}>Home</button>
 		</div>
 	{:else}
 		<div class="typing-area">

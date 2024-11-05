@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	let words: string[] = [];
 	let currentInput: string = '';
@@ -16,7 +17,12 @@
 	const wordList: string[] = [
 		'function', 'var', 'let', 'const', 'if', 'else', 'for', 'while', 'do', 'switch',
 		'case', 'break', 'continue', 'return', 'try', 'catch', 'finally', 'throw', 'new',
-		'this', 'class', 'extends', 'super', 'constructor', 'get', 'set', 'static', 'async', 'await'
+		'this', 'class', 'extends', 'super', 'constructor', 'get', 'set', 'static', 'async', 'await',
+		'abstract', 'assert', 'boolean', 'byte', 'char', 'default', 'double', 'enum', 'final', 'float',
+		'implements', 'import', 'instanceof', 'int', 'interface', 'long', 'native', 'package',
+		'private', 'protected', 'public', 'short', 'strictfp', 'synchronized', 'transient',
+		'void', 'volatile', 'False', 'None', 'True', 'and', 'as', 'def', 'del', 'elif', 'except', 'from', 
+		'global', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'with', 'yield'
 	];
 
 	function generateWords() {
@@ -114,6 +120,7 @@
 				</div>
 			</div>
 			<button on:click={restart}>Restart</button>
+      <button on:click={() => goto('/')}>Home</button>
 		</div>
 	{:else}
 		<div class="typing-area">
