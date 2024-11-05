@@ -3,8 +3,8 @@
 </script>
 
 <div class="menu">
-	<button on:click={() => goto('/long')}>Long Test</button>
-	<button on:click={() => goto('/short')}>Short Test</button>
+	<button on:click={() => goto('/long')}>Long</button>
+	<button on:click={() => goto('/short')}>Short</button>
 </div>
 
 <style>
