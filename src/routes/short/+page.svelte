@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { initializeTest, finishTest, type TypingTest } from '../common';
+	import { initializeTest, finishTest, type TypingTest } from '../../lib/componets/common';
 
 	const wordList: string[] = [
 		'function', 'var', 'let', 'const', 'if', 'else', 'for', 'while', 'do', 'switch',
