@@ -14,7 +14,8 @@
 	let incorrectChars: { [key: number]: Set<number> } = {};
 
 	const wordList: string[] = [
-		'I still see your shadows in my room. Can\'t take back the love that I gave you. It\'s to the point where I love and I hate you. And I cannot change you, so I must replace you.', 'Easier said than done. I thought you were the one. Listening to my heart instead of my head. You found another one, but I am the better one. I won\'t let you forget me.'
+		'I still see your shadows in my room. Can\'t take back the love that I gave you. It\'s to the point where I love and I hate you. And I cannot change you, so I must replace you.', 
+    'Easier said than done. I thought you were the one. Listening to my heart instead of my head. You found another one, but I am the better one. I won\'t let you forget me.'
 	];
 
 	function generateWords() {
