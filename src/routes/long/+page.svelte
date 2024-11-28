@@ -4,8 +4,10 @@
 	import { initializeTest, finishTest, type TypingTest } from '../../lib/components/common';
 
 	const wordList: string[] = [
-		'I still see your shadows in my room. Can\'t take back the love that I gave you. It\'s to the point where I love and I hate you. And I cannot change you, so I must replace you.', 
-		'Easier said than done. I thought you were the one. Listening to my heart instead of my head. You found another one, but I am the better one. I won\'t let you forget me.'
+		'In the world of software, the best way to predict the future is to invent it.', 
+		'Code is like humor. When you have to explain it, it\'s bad.',
+		'Simplicity is the soul of efficiency.',
+		'Refactoring is like dental hygiene for software engineers. Skip it, and you\'ll have a lot more to worry about than just a bad smell.',
 	];
 
 	let test: TypingTest = initializeTest(wordList, 1);
